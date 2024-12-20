@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import _ from "lodash";
 
 const app = express();
 const port = 3000;
@@ -43,18 +44,18 @@ app.post("/submit", (req, res) => {
   res.redirect("/compose");
 });
 app.get("/:dynamicTitle", (req, res) => {
-  const dynamicTitle = req.params.dynamicTitle;
-  const title = posts.map((post) => post.title);
-  if (title.includes(dynamicTitle)) {
-    const titleIndex = title.indexOf(dynamicTitle);
-    res.render("dynamicPage", {
-      dynamicT: dynamicTitle,
-      post: posts[titleIndex].content,
-      copyYear: new Date().getFullYear(),
-    });
-  } else {
-    res.status(404).send("Page not found");
-  }
+  const dynamicT = _.lowerCase(req.params.dynamicTitle);
+
+  posts.forEach((element) => {
+    const lTitle = _.lowerCase(element.title);
+    if (lTitle === dynamicT) {
+      res.render("dynamicPage", {
+        title: element.title,
+        content: element.content,
+        copyYear: new Date().getFullYear(),
+      });
+    }
+  });
 });
 
 app.listen(port, () => {
