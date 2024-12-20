@@ -6,7 +6,6 @@ const port = 3000;
 let editorContent = [];
 let titleBody = [];
 let contentBody = "";
-let titleContent = "";
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -29,14 +28,12 @@ app.get("/about", (req, res) => {
 
 app.get("/contact", (req, res) => {
   res.render("contact", {
-    title: "Contact",
     copyYear: new Date().getFullYear(),
   });
 });
 
 app.get("/compose", (req, res) => {
   res.render("compose", {
-    title: "Contact",
     copyYear: new Date().getFullYear(),
   });
 });
@@ -44,14 +41,8 @@ app.get("/compose", (req, res) => {
 app.post("/submit", (req, res) => {
   contentBody = req.body.content;
   editorContent.push(contentBody);
-  titleContent = req.body.title;
   titleBody.push(req.body.title);
-  res.render("compose", {
-    post: editorContent,
-    copyYear: new Date().getFullYear(),
-    count: contentBody.length,
-    title: titleBody,
-  });
+  res.redirect("/compose");
 });
 app.get("/:dynamicTitle", (req, res) => {
   const dynamicTitle = req.params.dynamicTitle;
