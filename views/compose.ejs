@@ -3,12 +3,7 @@
   <h1 style="text-align: center; margin-top: 20px">Compose</h1>
 
   <div id="editor-wrapper">
-    <form
-      id="editor-form"
-      action="/submit"
-      method="POST"
-      onsubmit="document.getElementById('content').value = quill.getText().trim();"
-    >
+    <form id="editor-form" action="/submit" method="POST" onsubmit="document.getElementById('content').value = quill.getText().trim();">
       <div>
         <h2 class="title">Title</h2>
         <input type="text" name="title" id="title" required />
@@ -18,7 +13,7 @@
       <div id="editor-container"></div>
       <input type="hidden" name="content" id="content" />
       <div id="submit-section">
-        <button type="submit" id="submit-btn">Submit Post</button>
+        <button type="submit" id="submit-btn">Publish</button>
       </div>
     </form>
   </div>

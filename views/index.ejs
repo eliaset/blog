@@ -9,16 +9,15 @@
       Welcome to my personal blog! Here, I share thoughts, stories, and moments
       that inspire me. Feel free to explore and leave your feedback!
     </p>
-
     <h2 class="recent-posts-title">Recent Posts</h2>
-    <% title.forEach((element, index) => { %>
+    <% posts.forEach((element) => { %>
     <div class="container">
-      <h3><%- element%></h3>
+      <h3><%- element.title%></h3>
       <div class="post-container">
         <div class="post">
-          <p><%= post[index] %></p>
+          <p><%= element.content %></p>
         </div>
-        <a href="/<%= element %>" class="read-more">read more</a>
+        <a href="/<%= element.title %>" class="read-more">read more</a>
       </div>
       <br />
     </div>

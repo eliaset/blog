@@ -3,9 +3,7 @@ import bodyParser from "body-parser";
 
 const app = express();
 const port = 3000;
-let editorContent = [];
-let titleBody = [];
-let contentBody = "";
+let posts = [];
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -14,9 +12,7 @@ app.use(express.static("public"));
 app.get("/", (req, res) => {
   res.render("index", {
     copyYear: new Date().getFullYear(),
-    post: editorContent,
-    count: contentBody.length,
-    title: titleBody,
+    posts: posts,
   });
 });
 
@@ -39,18 +35,21 @@ app.get("/compose", (req, res) => {
 });
 
 app.post("/submit", (req, res) => {
-  contentBody = req.body.content;
-  editorContent.push(contentBody);
-  titleBody.push(req.body.title);
+  const post = {
+    title: req.body.title,
+    content: req.body.content,
+  };
+  posts.push(post);
   res.redirect("/compose");
 });
 app.get("/:dynamicTitle", (req, res) => {
   const dynamicTitle = req.params.dynamicTitle;
-  if (titleBody.includes(dynamicTitle)) {
-    const titleIndex = titleBody.indexOf(dynamicTitle);
+  const title = posts.map((post) => post.title);
+  if (title.includes(dynamicTitle)) {
+    const titleIndex = title.indexOf(dynamicTitle);
     res.render("dynamicPage", {
       dynamicT: dynamicTitle,
-      post: editorContent[titleIndex],
+      post: posts[titleIndex].content,
       copyYear: new Date().getFullYear(),
     });
   } else {
