@@ -38,6 +38,10 @@ html {
   font-size: 12px;
   color: #fff;
 }
+#title {
+  width: 100%;
+}
+
 #editor-wrapper {
   max-width: 800px;
   margin: 30px auto;
@@ -97,4 +101,27 @@ html {
     font-size: 16px;
     padding: 10px 25px;
   }
+}
+
+.post-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.post {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 50%;
+  margin-right: 10px;
+}
+
+.read-more {
+  text-decoration: none;
+  color: #007bff;
+  white-space: nowrap;
+  flex-shrink: 0;
 }

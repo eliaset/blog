@@ -1,19 +1,23 @@
-<%- include("header.ejs") %> 
-<%- include("navbar.ejs") %>
+<%- include("header.ejs") %> <%- include("navbar.ejs") %>
 <body>
-  <h1 style="text-align: center; margin-top: 20px">Daily Journal</h1>
+  <h1 style="text-align: center; margin-top: 20px">Compose</h1>
 
   <div id="editor-wrapper">
-    <form id="editor-form" action="/submit" method="POST" onsubmit="document.getElementById('content').value = quill.root.innerHTML;">
-      <div id="toolbar"></div>      
+    
+    <form id="editor-form" action="/submit" method="POST" onsubmit="document.getElementById('content').value = quill.getText().trim();">
+        <div>
+            <h2 class="title">Title</h2>
+            <input type="text" name="title" id="title">
+          </div>
+          <br/>
+        <div id="toolbar"></div>
       <div id="editor-container"></div>
-      <input type="hidden" name="content" id="content">
+      <input type="hidden" name="content" id="content" />
       <div id="submit-section">
         <button type="submit" id="submit-btn">Submit Post</button>
       </div>
     </form>
   </div>
-
 
   <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
   <script>
